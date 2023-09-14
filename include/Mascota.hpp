@@ -13,7 +13,7 @@ public:
         this->nombre = nombre;
     }
 
-    ~Mascota(){}
+    ~Mascota(){
     void Jugar()
     {
         this->hambre += 5;
