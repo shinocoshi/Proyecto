@@ -1,11 +1,7 @@
-#include <iostream>
+// UserFunction.cpp
+#include "UserFunction.hpp"
 #include <cmath>
-#include <iomanip>
-using namespace std;
 
-class UserFunction : public Function {
-public:
-    double evaluate(double x) override {
-        return pow(x, 3) / (1 + sqrt(x));
-    }
-};
+double UserFunction::evaluate(double x) {
+    return pow(x, 3) / (1 + sqrt(x));
+}

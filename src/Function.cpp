@@ -1,8 +1,3 @@
-#include <iostream>
-#include <cmath>
-#include <iomanip>
-
-class Function {
-public:
-    virtual double evaluate(double x) = 0;
-};
+// Function.cpp
+#include "Function.hpp"
+// No es necesario implementar nada aquí ya que es una clase abstracta

@@ -1,16 +1,26 @@
-LIBS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer
-INCLUDE_PATH = -Iinclude
+CC := g++
+CFLAGS := -Wall -std=c++11
+INCLUDE := -Iinclude
+SRC_DIR := src
+OBJ_DIR := obj
 
-SRCS = src/main.cpp src/SimpsonOneThird.cpp src/Function.cpp src/UserFunction.cpp src/InputOutput.cpp
-EXE = bin/PROYECTO
+SRCS := $(wildcard $(SRC_DIR)/*.cpp)
+OBJS := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
+TARGET := mi_programa
 
-# Crear el directorio bin si no existe
-$(shell mkdir -p bin)
+all: $(OBJ_DIR) $(TARGET)
 
-# Regla para construir el ejecutable
-$(EXE): $(SRCS)
-	g++ $(SRCS) -o $@ $(INCLUDE_PATH) $(LIBS)
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
-# Regla para ejecutar el programa
-run: $(EXE)
-	./$(EXE)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $@
+
+run: $(TARGET)
+	./$(TARGET)
+
+clean:
+	rm -rf $(OBJ_DIR) $(TARGET)

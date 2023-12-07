@@ -1,7 +1,6 @@
-#include <iostream>
-#include <cmath>
-#include <iomanip>
-using namespace std;
+#include "UserFunction.hpp"
+#include "SimpsonOneThird.hpp"
+#include "InputOutput.hpp"
 
 int main() {
     double a, b;
