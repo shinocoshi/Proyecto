@@ -1,49 +1,25 @@
-#include <Ventana.hpp>
-#include <Dibujo.hpp>
-#include <curses.h>
-#include <unistd.h>
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+using namespace std;
 
-int main(int argc, char const *argv[])
-{
+int main() {
+    double a, b;
+    int n;
 
-    Ventana v;
+    InputOutput io;
+    io.getInput(a, b, n);
 
-    Dibujo d1(100, 1, "zombie");
-    Dibujo d2(1, 1, "planta");
-    bool ejecucion = true;
-    while (ejecucion)
-    {
-        // ciclo de actualizacion
-        v.Actualizar();
-        int input = getch();
-        switch (input)
-        {
-        case 'q':
-            ejecucion = false;
-            break;
-        case 'd':
-            d1.AvanzarX(1);
-            break;
-        case 'a':
-            d1.RetrocederX(1);
-            break;
-        case 'w':
-            d1.RetrocederY(1); // Mueve hacia arriba en Y
-            break;
-        case 's':
-            d1.AvanzarY(1); // Mueve hacia abajo en Y
-            break;
-        }
-        // ciclo de dibujo
-        clear();
-        d2.Dibujar();
-        d1.Dibujar();
-
-        // v.Dibujar();
-
-        refresh();
-        usleep(41000); // 24 fps
+    if (n % 2 != 0) {
+        io.displayErrorMessage();
+        return 1;
     }
+
+    UserFunction userFunc;
+    SimpsonOneThird simpson;
+    double result = simpson.integrate(a, b, n, userFunc);
+
+    io.displayResult(result);
 
     return 0;
 }
